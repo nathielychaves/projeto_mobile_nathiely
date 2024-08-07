@@ -1,31 +1,36 @@
 var meuFormulario = document.getElementById("formulario");
 meuFormulario.addEventListener("submit", function(event) {
-  event.preventDefault();
+  event.preventDefault(); 
 
-  //Chama a função divisao
-  divisao();
-
+  adicionarValor();
+  mostrarPares();
 });
 
+let vetor = [];
 
-//Função divisao
-function divisao() {
-  
-  //Captura o que está dentro do primeiro input no formulário
-  //Number - Transforma o texto capturado em Numero
-  let primeiro_numero_inteiro = Number(document.getElementById("primeiro_numero_inteiro").value);
-  
-  //Captura o que está dentro do segundo input no formulário
-  //Number - Transforma o texto capturado em Numero
-  let segundo_numero_inteiro = Number(document.getElementById("segundo_numero_inteiro").value); 
-  
-  //Realiza a soma do valor que está na variável "primeiro_numero_inteiro" com o valor que está na
-  //variável "segundo_numero_inteiro"
-  //E a variável "resultado_soma" recebe o valor da soma
-  let resultado_soma = primeiro_numero_inteiro / segundo_numero_inteiro;
+function adicionarValor() {
+  const valor = Number(document.getElementById('valor').value);
+  vetor.push(valor);
 
-  //Aqui vai escrever no input "resultado_soma" o valor que está armazenado na variável "resultado_soma"
-  document.getElementById("resultado_soma").value = resultado_soma;
-  
-  
+  const tabela = document.getElementById('tabelaValores').getElementsByTagName('tbody')[0];
+  const novalinha = tabela.insertRow();
+  const celula = novalinha.insertCell();
+  celula.textContent = valor;
+
+  document.getElementById('valor').value = '';
 }
+
+function mostrarPares() {
+  const tabela = document.getElementById("tabelaPares").getElementsByTagName("tbody")[0];
+
+
+  for (let i = 0; i < vetor.length; i++) {
+    const valor = vetor[i];
+    if (valor % 2 === 0) {
+      const linha = tabela.insertRow();
+      const celula = linha.insertCell();
+      celula.textContent = valor;
+    }
+  }
+}
+
